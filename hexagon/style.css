@@ -1,0 +1,113 @@
+.hexagon {
+    position: relative;
+    width: 60px;
+    height: 100px;
+    background: #000;
+}
+
+/* before / after permet de jouer sur le debut et la fin de element sélectionner*/
+.hexagon:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -30px;
+    width: 0;
+    height: 0;
+    border-right: 30px solid #000;
+    border-bottom: 50px solid transparent;
+    border-top: 50px solid transparent;
+}
+
+.hexagon:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -30px;
+    width: 0;
+    height: 0;
+    border-left: 30px solid #000;
+    border-bottom: 50px solid transparent;
+    border-top: 50px solid transparent;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: black;
+}
+
+.container {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    animation: animate 4s linear;
+}
+
+/* keyframe va permettre d'apposer une animation sur une cle définis plus haut
+dans notre cas "animate"
+hue-rotate va permettre de mettre une rotation de teinte sur l'animation
+*/
+@keyframes animate {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+
+.row {
+    display: inline-flex;
+    margin-top: -32px;
+    margin-left: -50px;
+}
+
+.row:nth-child(even) {
+    margin-left: 1px;
+}
+
+/* autre possibilité avec clip path , exemple simple a trouver sur clip path maker*/
+.hexagon-with-clip {
+    position: relative;
+    width: 100px;
+    height: 110px;
+    background: #111;
+    margin: 2px;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    transition: 2s;
+}
+
+.hexagon-with-clip:hover {
+    transition: 0s;
+    background: #81cad7;
+}
+
+.hexagon-with-clip:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    pointer-events: none;
+    background: rgba(227, 13, 13, 0.03);
+    z-index: 1000;
+}
+
+.hexagon-with-clip:after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    bottom: 4px;
+    right: 4px;
+    pointer-events: none;
+    background: #111;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    z-index: 1;
+}
